@@ -1,0 +1,13 @@
+{
+    "name": "mnib/guzzle-throttle-middleware",
+    "type": "library",
+    "require": {
+        "php": "^5.5|^7.0",
+        "psr/http-message": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MNIB\\Guzzle\\": "src/"
+        }
+    }
+}
