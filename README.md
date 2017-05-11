@@ -1,6 +1,6 @@
 # Usage
     $handlerStack = HandlerStack::create();
-    $handlerStack->push(new ThrottleMiddleware());
+    $handlerStack->push(new \MNIB\Guzzle\ThrottleMiddleware());
     
     $httpClient = new \GuzzleHttp\Client(array(
         'handler' => $handlerStack,
