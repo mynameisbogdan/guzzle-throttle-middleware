@@ -10,7 +10,7 @@ use Psr\Http\Message\RequestInterface;
 class ThrottleMiddleware
 {
     /** @var float */
-    private $lastRequestTime;
+    private $lastRequestTime = 0;
 
     public function __invoke(callable $handler)
     {
