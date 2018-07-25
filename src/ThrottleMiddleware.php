@@ -36,31 +36,28 @@ class ThrottleMiddleware
     }
 
     /**
-     * @return float|null
+     * @return float
      */
-    public function getLastRequestTime()
+    public function getLastRequestTime(): float
     {
         return $this->lastRequestTime;
     }
 
     /**
-     * @param float|null $lastRequestTime
-     * @return ThrottleMiddleware
+     * @param float $lastRequestTime
      */
-    public function setLastRequestTime($lastRequestTime)
+    public function setLastRequestTime(float $lastRequestTime): void
     {
         $this->lastRequestTime = $lastRequestTime;
-
-        return $this;
     }
 
     /**
      * Calculate the remaining delay.
      *
-     * @param $throttleDelay
+     * @param int $throttleDelay
      * @return float
      */
-    protected function getDelay($throttleDelay)
+    protected function getDelay(int $throttleDelay): float
     {
         $lastRequestTime = $this->getLastRequestTime();
         $requestTime = microtime(true);
@@ -73,7 +70,7 @@ class ThrottleMiddleware
      *
      * @param int $delay
      */
-    protected function throttle($delay)
+    protected function throttle(int $delay): void
     {
         $delay = max(0, round($delay * 1000));
 

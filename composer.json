@@ -2,7 +2,7 @@
     "name": "mnib/guzzle-throttle-middleware",
     "type": "library",
     "require": {
-        "php": "^5.5|^7.0",
+        "php": "^7.1.3",
         "psr/http-message": "^1.0"
     },
     "autoload": {
