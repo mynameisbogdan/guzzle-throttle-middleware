@@ -1,7 +1,17 @@
 <?php
+
+declare(strict_types=1);
+
 namespace MNIB\Guzzle;
 
+use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
+use function is_numeric;
+use function max;
+use function microtime;
+use function round;
+use function sprintf;
+use function usleep;
 
 /**
  * Middleware to throttle requests in Guzzle.
@@ -15,10 +25,10 @@ class ThrottleMiddleware
     public function __invoke(callable $handler)
     {
         return function (RequestInterface $request, $options) use ($handler) {
-            if (!empty($options['throttle_delay'])) {
+            if (isset($options['throttle_delay'])) {
                 if (!is_numeric($options['throttle_delay'])) {
-                    throw new \InvalidArgumentException(
-                        sprintf('Invalid value for throttle_delay usage in %s.', __CLASS__)
+                    throw new InvalidArgumentException(
+                        sprintf('Invalid value for throttle_delay usage in %s.', self::class)
                     );
                 }
 
@@ -35,17 +45,11 @@ class ThrottleMiddleware
         };
     }
 
-    /**
-     * @return float
-     */
     public function getLastRequestTime(): float
     {
         return $this->lastRequestTime;
     }
 
-    /**
-     * @param float $lastRequestTime
-     */
     public function setLastRequestTime(float $lastRequestTime): void
     {
         $this->lastRequestTime = $lastRequestTime;
@@ -55,14 +59,15 @@ class ThrottleMiddleware
      * Calculate the remaining delay.
      *
      * @param int $throttleDelay
-     * @return float
+     *
+     * @return int
      */
-    protected function getDelay(int $throttleDelay): float
+    protected function getDelay(int $throttleDelay): int
     {
         $lastRequestTime = $this->getLastRequestTime();
         $requestTime = microtime(true);
 
-        return $lastRequestTime ? max(0, $throttleDelay - (1000 * ($requestTime - $lastRequestTime))) : 0;
+        return $lastRequestTime ? max(0, $throttleDelay - 1000 * ($requestTime - $lastRequestTime)) : 0;
     }
 
     /**
