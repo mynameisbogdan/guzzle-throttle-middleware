@@ -77,7 +77,7 @@ class ThrottleMiddleware
      */
     protected function throttle(int $delay): void
     {
-        $delay = max(0, round($delay * 1000));
+        $delay = (int)max(0, round($delay * 1000));
 
         usleep($delay);
     }
