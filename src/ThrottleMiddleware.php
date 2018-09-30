@@ -19,7 +19,7 @@ use function usleep;
  */
 class ThrottleMiddleware
 {
-    /** @var float */
+    /** @var int */
     private $lastRequestTime = 0;
 
     public function __invoke(callable $handler)
@@ -38,19 +38,19 @@ class ThrottleMiddleware
                     $this->throttle($delay);
                 }
 
-                $this->setLastRequestTime(microtime(true));
+                $this->setLastRequestTime((int)microtime(true));
             }
 
             return $handler($request, $options);
         };
     }
 
-    public function getLastRequestTime(): float
+    public function getLastRequestTime(): int
     {
         return $this->lastRequestTime;
     }
 
-    public function setLastRequestTime(float $lastRequestTime): void
+    public function setLastRequestTime(int $lastRequestTime): void
     {
         $this->lastRequestTime = $lastRequestTime;
     }
@@ -65,7 +65,7 @@ class ThrottleMiddleware
     protected function getDelay(int $throttleDelay): int
     {
         $lastRequestTime = $this->getLastRequestTime();
-        $requestTime = microtime(true);
+        $requestTime = (int)microtime(true);
 
         return $lastRequestTime ? max(0, $throttleDelay - 1000 * ($requestTime - $lastRequestTime)) : 0;
     }
