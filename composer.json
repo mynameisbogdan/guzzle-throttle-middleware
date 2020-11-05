@@ -3,8 +3,8 @@
     "description": "A middleware for Guzzle that limits request per defined period.",
     "type": "library",
     "require": {
-        "php": "^7.2.5",
-        "guzzlehttp/guzzle": "^6.0|^7.0",
+        "php": "^7.2.5||^8.0",
+        "guzzlehttp/guzzle": "^6.0||^7.0",
         "psr/http-message": "^1.0"
     },
     "require-dev": {
