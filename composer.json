@@ -1,0 +1,27 @@
+{
+    "name": "mnib-dev/guzzle-throttle-middleware",
+    "description": "A middleware for Guzzle that limits request per defined period.",
+    "type": "library",
+    "require": {
+        "php": "^7.2.5 || ^8.0.2",
+        "guzzlehttp/guzzle": "^6.0 || ^7.0.1",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "mnib-dev/coding-standard": "^0.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "MNIB\\Guzzle\\": "src/"
+        }
+    }
+}
