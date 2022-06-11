@@ -4,11 +4,16 @@
     "type": "library",
     "require": {
         "php": "^7.2.5 || ^8.0.2",
-        "guzzlehttp/guzzle": "^6.0 || ^7.0.1",
+        "guzzlehttp/guzzle": "^6.5.7 || ^7.4.4",
         "psr/http-message": "^1.0"
     },
     "require-dev": {
         "mnib-dev/coding-standard": "^0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "MNIB\\Guzzle\\": "src/"
+        }
     },
     "config": {
         "allow-plugins": {
@@ -18,10 +23,5 @@
             "*": "dist"
         },
         "sort-packages": true
-    },
-    "autoload": {
-        "psr-4": {
-            "MNIB\\Guzzle\\": "src/"
-        }
     }
 }
