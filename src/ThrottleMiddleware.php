@@ -6,6 +6,7 @@ namespace MNIB\Guzzle;
 
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
+
 use function is_numeric;
 use function max;
 use function microtime;
@@ -16,13 +17,14 @@ use function usleep;
 /**
  * Middleware to throttle requests in Guzzle.
  * Useful when you're limited to an explicit number of requests per second.
+ *
+ * @final
  */
 class ThrottleMiddleware
 {
-    /** @var int */
-    private $lastRequestTime = 0;
+    private int $lastRequestTime = 0;
 
-    public function __invoke(callable $handler)
+    public function __invoke(callable $handler): callable
     {
         return function (RequestInterface $request, $options) use ($handler) {
             if (isset($options['throttle_delay'])) {
@@ -57,10 +59,6 @@ class ThrottleMiddleware
 
     /**
      * Calculate the remaining delay.
-     *
-     * @param int $throttleDelay
-     *
-     * @return int
      */
     protected function getDelay(int $throttleDelay): int
     {
@@ -72,8 +70,6 @@ class ThrottleMiddleware
 
     /**
      * Sleep till the next request is ready to go.
-     *
-     * @param int $delay
      */
     protected function throttle(int $delay): void
     {

@@ -3,12 +3,12 @@
     "description": "A middleware for Guzzle that limits request per defined period.",
     "type": "library",
     "require": {
-        "php": "^7.2.5 || ^8.0.2",
-        "guzzlehttp/guzzle": "^6.5.8 || ^7.4.5",
-        "psr/http-message": "^1.0"
+        "php": "^7.4 || ^8.0.2",
+        "guzzlehttp/guzzle": "^7.15.2 || ^8.0.1",
+        "psr/http-message": "^1.0 || ^2.0"
     },
     "require-dev": {
-        "mnib-dev/coding-standard": "^0.1"
+        "mnib-dev/coding-standard": "^0.1.6"
     },
     "autoload": {
         "psr-4": {
@@ -23,5 +23,9 @@
             "*": "dist"
         },
         "sort-packages": true
+    },
+    "scripts": {
+        "cs:check": "vendor/bin/php-cs-fixer fix --dry-run --ansi -vvv --show-progress=dots --diff",
+        "cs:fix": "vendor/bin/php-cs-fixer fix --ansi -vvv --show-progress=dots --diff"
     }
 }

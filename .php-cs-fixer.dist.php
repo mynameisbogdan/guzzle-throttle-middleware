@@ -10,6 +10,6 @@ $finder = PhpCsFixer\Finder::create()
     ->name('*.php')
 ;
 
-return MNIB\CsFixer\Config::create()
+return (new MNIB\CsFixer\Config())
     ->setFinder($finder)
 ;
