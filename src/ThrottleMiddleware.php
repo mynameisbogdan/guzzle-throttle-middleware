@@ -6,7 +6,6 @@ namespace MNIB\Guzzle;
 
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
-
 use function is_numeric;
 use function max;
 use function microtime;
@@ -26,12 +25,10 @@ class ThrottleMiddleware
 
     public function __invoke(callable $handler): callable
     {
-        return function (RequestInterface $request, $options) use ($handler) {
+        return static function (RequestInterface $request, $options) use ($handler): callable {
             if (isset($options['throttle_delay'])) {
                 if (!is_numeric($options['throttle_delay'])) {
-                    throw new InvalidArgumentException(
-                        sprintf('Invalid value for throttle_delay usage in %s.', self::class)
-                    );
+                    throw new InvalidArgumentException(sprintf('Invalid value for throttle_delay usage in %s.', self::class));
                 }
 
                 $delay = $this->getDelay($options['throttle_delay']);
