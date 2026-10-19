@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MNIB\Guzzle;
 
+use GuzzleHttp\Promise\PromiseInterface;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
 use function is_numeric;
@@ -25,7 +26,7 @@ class ThrottleMiddleware
 
     public function __invoke(callable $handler): callable
     {
-        return static function (RequestInterface $request, $options) use ($handler): callable {
+        return function (RequestInterface $request, $options) use ($handler): PromiseInterface {
             if (isset($options['throttle_delay'])) {
                 if (!is_numeric($options['throttle_delay'])) {
                     throw new InvalidArgumentException(sprintf('Invalid value for throttle_delay usage in %s.', self::class));
